@@ -1,0 +1,57 @@
+.greeting {
+  display: flex;
+  justify-content: center;
+  background-image: url("../../assets/images/greetBack.png");
+  background-repeat: no-repeat;
+  background-position: 100% 0%;
+  background-size: cover;
+  width: 100vw;
+  height: 650px;
+}
+
+.greeting__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1160px;
+}
+
+.greeting__description {
+  display: flex;
+  flex-direction: column;
+}
+
+.greeting__text {
+  color: #2c0571;
+  font-family: Gilroy;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+  /* text-decoration-line: underline;
+  text-decoration: underline;
+  -webkit-text-decoration-line: underline; */
+  width: 700px;
+  margin-top: 40px;
+}
+
+.greeting__inner-image {
+  margin: 73px 0 0 100px;
+  object-fit: cover;
+}
+
+.greeting__test {
+  margin-top: 45px;
+}
+
+.greeting__test-text {
+  color: #22253b;
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 23px;
+  margin-bottom: 18px;
+}
+

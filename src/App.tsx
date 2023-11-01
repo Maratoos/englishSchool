@@ -1,0 +1,44 @@
+import { FC, useEffect } from "react";
+import { Route, Routes } from "react-router";
+import { useAppDispatch } from "./hooks/redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/config";
+import { setUser } from "./store/reducers/AuthSlice";
+import { Layout } from "./layout/Layout/Layout";
+import { Home } from "./pages/Home/Home";
+import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
+import { Auth } from "./pages/Auth/Auth";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+
+export const App: FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, async (_user) => {
+      if (_user) {
+        dispatch(setUser(_user));
+      }
+    });
+
+    return () => unsub();
+  }, []);
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="admin"
+            element={
+              <PrivateRoute>
+                <AdminPanel />
+              </PrivateRoute>
+            }
+          />
+          <Route path="auth" element={<Auth />} />
+        </Route>
+      </Routes>
+    </>
+  );
+};

@@ -1,0 +1,48 @@
+header {
+  position: fixed;
+  display: flex;
+  width: 1160px;
+  height: 51px;
+  border-radius: 75px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(7.5px);
+  margin-top: 12px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.logo__text-top,
+.logo__text-bottom {
+  color: #531b9a;
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 104.4%;
+}
+
+nav {
+  margin-left: 70px;
+}
+
+.navbar__items {
+  display: flex;
+}
+
+.navbar__items-link {
+  margin-right: 41px;
+  color: #9970CC;
+  text-align: center;
+  font-family: Gilroy;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 104.4%;
+  cursor: pointer;
+}

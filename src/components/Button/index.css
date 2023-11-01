@@ -1,0 +1,25 @@
+.main-button {
+  width: 321px;
+  height: 70px;
+  border-radius: 82px;
+  background: #2e16b1;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  color: #fff;
+  font-family: Gilroy;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 96.688%;
+  letter-spacing: -0.6px;
+  background-image: url("../../assets/icons/arrowTopRight.svg");
+  background-repeat: no-repeat;
+  background-position: 89% 52%;
+  transition: 0.3s;
+}
+
+.main-button:hover {
+  background-color: #f15525;
+}

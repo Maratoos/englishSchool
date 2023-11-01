@@ -1,0 +1,116 @@
+.process {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("../../assets/images/bigCircleBack.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 800px;
+}
+
+.process__description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1600px;
+  height: 500px;
+  border-radius: 40px;
+  background: #fff;
+  box-shadow: 0px 81px 120px -77px rgba(34, 37, 59, 0.04);
+  margin-top: 50px;
+}
+
+.process__description-item {
+  width: 370px;
+  background: #530fad;
+  height: 450px;
+  margin-left: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.process__description-item-title {
+  margin: 20px 0 0 10px;
+  color: #fff;
+  font-family: Gilroy;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.process__description-item:first-child,
+.process__description-item-card:first-child {
+  margin-left: 0;
+}
+
+.process__description-item-cards {
+  border-radius: 20px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.process__description-item-card {
+  width: 90px;
+  height: 90px;
+  margin-left: 10px;
+  border-radius: 20px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.process__description-item-card > span {
+  color: #151832;
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.process__description-item-desc,
+.process__description-item-goal {
+  color: #fff;
+  font-family: Gilroy;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  margin: 10px 0 0 10px;
+}
+
+.process__description-item-goal {
+  font-size: 20px;
+  text-decoration: underline;
+  margin: 20px 0 0 10px;
+}
+
+.process__try {
+  width: 538px;
+  height: 93px;
+  border-radius: 110px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  margin-top: 26px;
+}
+
+.process__try-text {
+  color: #22253b;
+  font-family: Manrope;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  width: 214px;
+  height: 54px;
+  margin-left: 24px;
+}
