@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import "./index.css";
+import crossMark from "../../assets/icons/crossMark.svg"
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ export const Modal: FC<Props> = ({ active, setActive, children }) => {
         className={active ? "modal__content active" : "modal__content"}
         onClick={(e) => e.stopPropagation()}
       >
+        <img src={crossMark} className="modal__crossMark" onClick={() => setActive(false)} alt="" />
         {children}
       </div>
     </div>

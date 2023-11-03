@@ -8,7 +8,7 @@ export const useCollection = (collectionName: string) => {
 
     const collectionRef = collection(firestore, collectionName)
 
-    const addDocument = async (newDocument: IReview | Omit<IApplication, "id" | "createdAt">): Promise<void> => {
+    const addDocument = async (newDocument: Omit<IReview, "id" | "createdAt"> | Omit<IApplication, "id" | "createdAt">): Promise<void> => {
         try {
             await addDoc(collectionRef, { ...newDocument, createdAt: new Date(), })
         } catch (err: any) {

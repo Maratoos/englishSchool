@@ -64,5 +64,39 @@
 
 .item__name,
 .item__inst {
-    font-size: 24px;
+  font-size: 24px;
+}
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewInput {
+  width: 70%;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #c1c1cb;
+  font-family: Gilroy;
+  outline: none;
+  padding-left: 13px;
+  margin-top: 40px;
+  resize: none;
+}
+
+.reviewInput:nth-child(3) {
+  height: 70px;
+}
+
+.counter {
+  margin-top: 10px;
+  color: #22253b;
+  text-align: center;
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 104.4%;
 }
