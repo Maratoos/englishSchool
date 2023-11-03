@@ -1,14 +1,13 @@
-import { addDoc, collection, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { DocumentData, PartialWithFieldValue, addDoc, collection, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firestore } from "../firebase/config";
-import { IApplication, IReview } from "../models/models";
 
 export const useCollection = (collectionName: string) => {
-    const [isCancelled, setIsCancelled] = useState(false)
+    const [isCancelled, setIsCancelled] = useState<boolean>(false)
 
     const collectionRef = collection(firestore, collectionName)
 
-    const addDocument = async (newDocument: Omit<IReview, "id" | "createdAt"> | Omit<IApplication, "id" | "createdAt">): Promise<void> => {
+    const addDocument = async <T>(newDocument: Omit<T, "id" | "createdAt">): Promise<void> => {
         try {
             await addDoc(collectionRef, { ...newDocument, createdAt: new Date(), })
         } catch (err: any) {
@@ -16,7 +15,7 @@ export const useCollection = (collectionName: string) => {
         }
     }
 
-    const updateDocument = async (docId: string, newData: {}): Promise<void> => {
+    const updateDocument = async (docId: string, newData: PartialWithFieldValue<DocumentData>): Promise<void> => {
         try {
             await setDoc(doc(firestore, collectionName, docId), newData, { merge: true })
         } catch (err: any) {

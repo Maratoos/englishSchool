@@ -1,10 +1,9 @@
 import { collection, getDocs, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { firestore } from '../firebase/config';
-import { IApplication } from '../models/models';
 
-export const getCollection = (collectionName: string) => {
-    const [documents, setDocuments] = useState<Array<IApplication>>([]);
+export const getCollection = <T>(collectionName: string) => {
+    const [documents, setDocuments] = useState<Array<T>>([]);
     const [error, setError] = useState<string | null>(null);
     const [isPending, setIsPending] = useState<boolean>(false);
 
@@ -14,9 +13,9 @@ export const getCollection = (collectionName: string) => {
         try {
             setIsPending(true);
             const querySnapshot = await getDocs(collectionRef);
-            const fetchedData: Array<IApplication> = []
+            const fetchedData: Array<T> = []
             querySnapshot.forEach((doc) => {
-                fetchedData.push({ id: doc.id, ...doc.data() } as IApplication)
+                fetchedData.push({ id: doc.id, ...doc.data() } as T)
             })
             setDocuments(fetchedData);
             setIsPending(false);

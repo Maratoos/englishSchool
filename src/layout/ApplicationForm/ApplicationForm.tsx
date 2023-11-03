@@ -4,9 +4,7 @@ import { IApplication } from "../../models/models";
 import { useCollection } from "../../hooks/useColection";
 
 export const ApplicationForm: FC = () => {
-  const [application, setApplication] = useState<
-    Omit<IApplication, "id" | "createdAt">
-  >({
+  const [application, setApplication] = useState<Omit<IApplication, "id" | "createdAt">>({
     name: "",
     email: "",
     country: "",
@@ -28,7 +26,7 @@ export const ApplicationForm: FC = () => {
     e.preventDefault();
     console.log("Я сработал");
     setButtonIsDisabled(true);
-    await addDocument(application);
+    await addDocument<IApplication>(application);
     formRef.current?.reset();
     setButtonIsDisabled(false);
   };

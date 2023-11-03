@@ -13,6 +13,7 @@ import { Typography } from "../../../components/Typography/Typography";
 import { getCollection } from "../../../hooks/getCollection";
 import { useCollection } from "../../../hooks/useColection";
 import { Timestamp } from "firebase/firestore";
+import { IApplication } from "../../../models/models";
 
 function formatDate(timestamp: Timestamp): string {
   const date = timestamp.toDate();
@@ -25,7 +26,7 @@ function formatDate(timestamp: Timestamp): string {
 }
 
 export const Applications: FC = () => {
-  const { documents, error, isPending } = getCollection("applications");
+  const { documents, error, isPending } = getCollection<IApplication>("applications");
   const { deleteDocument, updateDocument } = useCollection("applications");
 
   return (

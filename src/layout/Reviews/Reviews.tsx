@@ -14,33 +14,7 @@ import { Modal } from "../../components/Modal/Modal";
 import { useCollection } from "../../hooks/useColection";
 import { IReview } from "../../models/models";
 import { CircularProgress } from "@mui/material";
-
-const reviewsItems: Array<Omit<IReview, "id" | "createdAt">> = [
-  {
-    name: "Marat",
-    instName: "rareitemboy",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium earum aliquam odio commodi officiis sequi, tenetur sint omnis minus fugiat esse repellendus minima neque veritatis! Quam architecto voluptatem odit earum!",
-  },
-  {
-    name: "Marat",
-    instName: "rareitemboy1",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium earum aliquam odio commodi officiis sequi, tenetur sint omnis minus fugiat esse repellendus minima neque veritatis! Quam architecto voluptatem odit earum!",
-  },
-  {
-    name: "Marat",
-    instName: "rareitemboy2",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium earum aliquam odio commodi officiis sequi, tenetur sint omnis minus fugiat esse repellendus minima neque veritatis! Quam architecto voluptatem odit earum!",
-  },
-  {
-    name: "Marat",
-    instName: "rareitemboy3",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium earum aliquam odio commodi officiis sequi, tenetur sint omnis minus fugiat esse repellendus minima neque veritatis! Quam architecto voluptatem odit earum!",
-  },
-];
+import { getCollection } from "../../hooks/getCollection";
 
 export const Reviews: FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
@@ -55,6 +29,7 @@ export const Reviews: FC = () => {
   );
   const formRef = useRef<HTMLFormElement | null>(null);
   const { addDocument } = useCollection("recievedReviews");
+  const { documents, isPending } = getCollection<IReview>("confirmedReviews");
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -68,7 +43,7 @@ export const Reviews: FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    await addDocument(modalInfo);
+    await addDocument<IReview>(modalInfo);
     formRef.current?.reset();
     setIsLoading(false);
     setTimeout(() => {
@@ -89,28 +64,30 @@ export const Reviews: FC = () => {
             navigation
             pagination={{ clickable: true }}
           >
-            {reviewsItems.map((review) => (
-              <SwiperSlide
-                key={review.instName}
-                className="reviews__mainSwiper-item"
-              >
-                <div className="item__container">
-                  <div className="item__innerContainer">
-                    <p className="item__text">{review.review}</p>
-                    <div className="item__userData">
-                      <PersonIcon
-                        sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
-                      />
-                      <span className="item__name">{review.name}, </span>
-                      <InstagramIcon
-                        sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
-                      />
-                      <span className="item__inst">{review.instName}</span>
+            {documents.length > 0 &&
+              !isPending &&
+              documents.map((review) => (
+                <SwiperSlide
+                  key={review.instName}
+                  className="reviews__mainSwiper-item"
+                >
+                  <div className="item__container">
+                    <div className="item__innerContainer">
+                      <p className="item__text">{review.review}</p>
+                      <div className="item__userData">
+                        <PersonIcon
+                          sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
+                        />
+                        <span className="item__name">{review.name}, </span>
+                        <InstagramIcon
+                          sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
+                        />
+                        <span className="item__inst">{review.instName}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
         <Button
@@ -151,9 +128,9 @@ export const Reviews: FC = () => {
               setLettersCounter(e.target.value.length);
             }}
             name="review"
-            maxLength={225}
+            maxLength={300}
           ></textarea>
-          <p className="counter">{`${lettersCounter}/225`}</p>
+          <p className="counter">{`${lettersCounter}/300`}</p>
           <div style={{ display: "flex", alignItems: "center" }}>
             <Button
               margin="20px 0"
