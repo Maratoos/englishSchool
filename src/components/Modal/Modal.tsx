@@ -1,16 +1,24 @@
-import { FC } from "react";
-import { Button } from "../Button/Button";
+import React, { FC } from "react";
 import "./index.css";
 
-export const Modal: FC = () => {
+interface Props {
+  children: React.ReactNode;
+  active: boolean;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Modal: FC<Props> = ({ active, setActive, children }) => {
   return (
-    <div className="modal__background">
-      <div className="modal__inner">
-        <p>ЗДЕСЬ БУДУТ УКАЗАНЫ КОНТАКТЫ</p>
-        <p>ЗДЕСЬ БУДУТ УКАЗАНЫ КОНТАКТЫ</p>
-        <p>ЗДЕСЬ БУДУТ УКАЗАНЫ КОНТАКТЫ</p>
+    <div
+      className={active ? "modal active" : "modal"}
+      onClick={() => setActive(false)}
+    >
+      <div
+        className={active ? "modal__content active" : "modal__content"}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {children}
       </div>
-      <Button text="Закрыть модалку" />
     </div>
   );
 };

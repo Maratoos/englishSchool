@@ -4,7 +4,9 @@ import { IApplication } from "../../models/models";
 import { useCollection } from "../../hooks/useColection";
 
 export const ApplicationForm: FC = () => {
-  const [application, setApplication] = useState<Omit<IApplication, "id" | "createdAt">>({
+  const [application, setApplication] = useState<
+    Omit<IApplication, "id" | "createdAt">
+  >({
     name: "",
     email: "",
     country: "",
