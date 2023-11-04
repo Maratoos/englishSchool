@@ -3,6 +3,11 @@ import { Typography } from "../../components/Typography/Typography";
 import "./process.css";
 import { Button } from "../../components/Button/Button";
 import { scrollToSection } from "../../hooks/scrollToSection";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 type TypeProcessItem = {
   title: string;
@@ -48,6 +53,33 @@ const processItems: Array<TypeProcessItem> = [
       "После прохождения этого уровня тебе в разы легче будет сдать международные экзамены TOEFL / IELTS / CAE , так как темы очень схожи с экзаменационными",
     ],
   },
+  {
+    title: "English for travelers",
+    cardItems: ["3000 слов", "1 месяц", "12 занятий"],
+    descriptionItems: [
+      "Сможешь использовать в речи advanced грамматику, например, complex subject и object, mixed conditionals и narrative fences",
+      "Сможешь рассуждать на академические темы, такие как: философия успехов и провалов, эффект FOMO/ JOMO, особенности человеческой памяти, чайлд-фри движение, теории заговоров и другие темы, которые расширят ваш кругозор",
+      "После прохождения этого уровня тебе в разы легче будет сдать международные экзамены TOEFL / IELTS / CAE , так как темы очень схожи с экзаменационными",
+    ],
+  },
+  {
+    title: "Business English",
+    cardItems: ["3000 слов", "1 месяц", "12 занятий"],
+    descriptionItems: [
+      "Сможешь использовать в речи advanced грамматику, например, complex subject и object, mixed conditionals и narrative fences",
+      "Сможешь рассуждать на академические темы, такие как: философия успехов и провалов, эффект FOMO/ JOMO, особенности человеческой памяти, чайлд-фри движение, теории заговоров и другие темы, которые расширят ваш кругозор",
+      "После прохождения этого уровня тебе в разы легче будет сдать международные экзамены TOEFL / IELTS / CAE , так как темы очень схожи с экзаменационными",
+    ],
+  },
+  {
+    title: "Exams",
+    cardItems: ["3000 слов", "1 месяц", "12 занятий"],
+    descriptionItems: [
+      "Сможешь использовать в речи advanced грамматику, например, complex subject и object, mixed conditionals и narrative fences",
+      "Сможешь рассуждать на академические темы, такие как: философия успехов и провалов, эффект FOMO/ JOMO, особенности человеческой памяти, чайлд-фри движение, теории заговоров и другие темы, которые расширят ваш кругозор",
+      "После прохождения этого уровня тебе в разы легче будет сдать международные экзамены TOEFL / IELTS / CAE , так как темы очень схожи с экзаменационными",
+    ],
+  },
 ];
 
 export const Process: FC = () => {
@@ -55,34 +87,42 @@ export const Process: FC = () => {
     <section id="process" className="process">
       <Typography text="Программа обучения" margin="55px 0 0 0" />
       <div className="process__description">
-        {processItems.map((item) => (
-          <div key={item.title} className="process__description-item">
-            <span className="process__description-item-title">
-              {item.title}
-            </span>
-            <div className="process__description-item-cards">
-              {item.cardItems.map((item) => (
-                <div key={item} className="process__description-item-card">
-                  <span>{item}</span>
+        <Swiper
+          className=""
+          cssMode={true}
+          modules={[Navigation]}
+          slidesPerView={2}
+          navigation
+        >
+          {processItems.map((item) => (
+            <SwiperSlide style={{display: "flex", justifyContent: "center"}} key={item.title}>
+              <div className="process__description-item">
+                <span className="process__description-item-title">
+                  {item.title}
+                </span>
+                <div className="process__description-item-cards">
+                  {item.cardItems.map((item) => (
+                    <div key={item} className="process__description-item-card">
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-            <span className="process__description-item-goal">Goal:</span>
-            <div>
-              {item.descriptionItems.map((item) => (
-                <p key={item} className="process__description-item-desc">
-                  {item}
-                </p>
-              ))}
-            </div>
-          </div>
-        ))}
+                <span className="process__description-item-goal">Goal:</span>
+                <div className="process__description-item-descsHolder">
+                  {item.descriptionItems.map((item) => (
+                    <p key={item} className="process__description-item-desc">
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
       <div className="process__try">
         <Button
-          onClick={() =>
-            scrollToSection("application")
-          }
+          onClick={() => scrollToSection("application")}
           backgroundColor="#530fad"
           text="Начать обучение"
           width="249px"

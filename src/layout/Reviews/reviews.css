@@ -27,11 +27,12 @@
 }
 
 .item__innerContainer {
-  height: 60%;
+  height: 70%;
   width: 80%;
   text-align: center;
   margin: auto;
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
   background-color: #8243d6;
@@ -65,6 +66,10 @@
 .item__name,
 .item__inst {
   font-size: 24px;
+}
+
+.item__text {
+  width: 90%;
 }
 
 .reviewForm {
