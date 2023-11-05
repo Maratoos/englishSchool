@@ -1,6 +1,7 @@
 import { FC } from "react";
 import "./header.css";
 import { scrollToSection } from "../../hooks/scrollToSection";
+import { BurgerMenu } from "../../components/BurgerMenu/BurgerMenu";
 
 const navbarItems: Array<{ text: string; section: string }> = [
   {
@@ -27,24 +28,27 @@ const navbarItems: Array<{ text: string; section: string }> = [
 
 export const Header: FC = () => {
   return (
-    <header>
-      <div className="logo" onClick={() => scrollToSection("greeting")}>
-        <span className="logo__text-top">Fara</span>
-        <span className="logo__text-bottom">Prism</span>
+    <header className="header__outer">
+      <div className="header__inner">
+        <div className="logo" onClick={() => scrollToSection("greeting")}>
+          <span className="logo__text-top">Fara</span>
+          <span className="logo__text-bottom">Prism</span>
+        </div>
+        <nav className="navbar">
+          <ul className="navbar__items">
+            {navbarItems.map((item) => (
+              <li
+                className="navbar__items-link"
+                onClick={() => scrollToSection(item.section)}
+                key={item.section}
+              >
+                {item.text}
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <BurgerMenu navbarItems={navbarItems} />
       </div>
-      <nav>
-        <ul className="navbar__items">
-          {navbarItems.map((item) => (
-            <li
-              className="navbar__items-link"
-              onClick={() => scrollToSection(item.section)}
-              key={item.section}
-            >
-              {item.text}
-            </li>
-          ))}
-        </ul>
-      </nav>
     </header>
   );
 };

@@ -9,9 +9,12 @@ import { Home } from "./pages/Home/Home";
 import { AdminPanel } from "./pages/AdminPanel/AdminPanel";
 import { Auth } from "./pages/Auth/Auth";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import { useLocation } from "react-router-dom";
+import { Header } from "./layout/Header/Header";
 
 export const App: FC = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (_user) => {
@@ -25,6 +28,9 @@ export const App: FC = () => {
 
   return (
     <>
+      {location.pathname !== "admin" && location.pathname !== "auth" && (
+        <Header />
+      )}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

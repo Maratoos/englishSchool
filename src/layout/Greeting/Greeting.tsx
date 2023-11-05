@@ -38,7 +38,6 @@ export const Greeting: FC = () => {
   return (
     <>
       <section id="greeting" className="greeting">
-        <Header />
         <div className="greeting__inner">
           <div className="greeting__description">
             <animated.h1 style={bigTextProps} className="greeting__text">

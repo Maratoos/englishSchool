@@ -1,0 +1,15 @@
+.header__menuBtn {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  right: 20px;
+  top: 19px;
+  display: none;
+}
+
+@media (max-width: 650px) {
+  .header__menuBtn {
+    display: block;
+  }
+}
