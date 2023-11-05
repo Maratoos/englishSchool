@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import "./greeting.css";
-import { Header } from "../Header/Header";
 import { Button } from "../../components/Button/Button";
 import { useSpring, animated } from "@react-spring/web";
 // import greeetingImage from "../../assets/images/greetingImage.png";

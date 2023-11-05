@@ -28,7 +28,7 @@ export const App: FC = () => {
 
   return (
     <>
-      {location.pathname !== "admin" && location.pathname !== "auth" && (
+      {location.pathname !== "/admin" && location.pathname !== "/auth" && (
         <Header />
       )}
       <Routes>
