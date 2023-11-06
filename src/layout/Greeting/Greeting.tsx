@@ -4,6 +4,7 @@ import { Button } from "../../components/Button/Button";
 import { useSpring, animated } from "@react-spring/web";
 // import greeetingImage from "../../assets/images/greetingImage.png";
 import { Modal } from "../../components/Modal/Modal";
+import greetBack from "../../assets/images/greetBack.png";
 
 export const Greeting: FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
@@ -40,19 +41,16 @@ export const Greeting: FC = () => {
         <div className="greeting__inner">
           <div className="greeting__description">
             <animated.h1 style={bigTextProps} className="greeting__text">
-              Welcome to FaraPrism English School! Discover your path to English
-              language excellence with us. Our dedicated educators and resources
-              are here to guide you on your journey. Explore our courses and
-              join our vibrant community to speak the language of success. Thank
-              you for choosing FaraPrism!
+              Welcome to FaraPrism English School! Я и мои опытные преподаватели
+              научим тебя любить английский язык. Присоединяйся к нашему
+              дружному сообществу и достигай успеха в английском. Ждем тебя на
+              уроке.
             </animated.h1>
             <animated.div style={smallTextProps} className="greeting__test">
-              <p className="greeting__test-text">
-                Пройди небольшое тестирование, чтобы узнать свой уровень
-              </p>
               <Button
                 onClick={() => setModalActive(true)}
-                text="Пройти тестирование"
+                text="Проверь свой уровень тут"
+                width="350px"
               />
             </animated.div>
           </div>

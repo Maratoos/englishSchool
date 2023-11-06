@@ -41,6 +41,10 @@
   line-height: 30px;
 }
 
+.process__description-item-title.other {
+  font-size: 20px;
+}
+
 .process__description-item:first-child,
 .process__description-item-card:first-child {
   margin-left: 0;
@@ -64,6 +68,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.process__description-item-card.other {
+  width: 80%;
+  height: 70px;
+} 
 
 .process__description-item-card > span {
   color: #151832;

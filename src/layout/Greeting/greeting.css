@@ -1,12 +1,21 @@
 .greeting {
   display: flex;
   justify-content: center;
-  background-image: url("../../assets/images/greetBack.png");
+  background-image: url("../../assets/images/greetNewBack.png");
   background-repeat: no-repeat;
   background-position: 100% 0%;
   background-size: cover;
   width: 100vw;
   height: 650px;
+}
+
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
 
 .greeting__inner {

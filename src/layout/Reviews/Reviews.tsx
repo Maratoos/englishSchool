@@ -78,11 +78,17 @@ export const Reviews: FC = () => {
                         <PersonIcon
                           sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
                         />
-                        <span className="item__name">{review.name}, </span>
-                        <InstagramIcon
-                          sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
-                        />
-                        <span className="item__inst">{review.instName}</span>
+                        <span className="item__name">{review.name} </span>
+                        {review.instName ? (
+                          <>
+                            <InstagramIcon
+                              sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
+                            />
+                            <span className="item__inst">
+                              {review.instName}
+                            </span>
+                          </>
+                        ) : null}
                       </div>
                     </div>
                   </div>

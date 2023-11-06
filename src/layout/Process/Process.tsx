@@ -1,83 +1,89 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Typography } from "../../components/Typography/Typography";
 import "./process.css";
 import { Button } from "../../components/Button/Button";
 import { scrollToSection } from "../../hooks/scrollToSection";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 type TypeProcessItem = {
   title: string;
-  cardItems: Array<string>;
+  module?: boolean;
+  otherLayout?: boolean;
+  cardItems?: Array<string>;
   descriptionItems: Array<string>;
 };
 
 const processItems: Array<TypeProcessItem> = [
   {
     title: "Elementary (A1)",
-    cardItems: ["500 слов", "1 месяц", "12 занятий"],
+    cardItems: ["+500 слов", "2 месяца", "24 занятия"],
     descriptionItems: [
-      "Научишься использовать в речи 5 основных времён",
-      "Сможешь рассказать о себе, о своей семье, хобби, работе, погоде и досуге",
-      "Научишься заказывать еду в ресторане, бронировать номер в отеле по лучшим условиям, спрашивать дорогу заграницей, арендовывать транспорт, ориентироваться в аэропорту и на вокзале",
-      "Сможешь говорить о своих чувствах и эмоциях, а также отписывать внешность и одежду любого человека",
+      "5 основных времён",
+      "Сможешь говорить во время путешествий(Заказывать еду, ориентироваться в аэропорту, бронировать отель и многое другое)",
+      "Научишься свободно говорить на базовые темы(О себе, семье, погоде, хобби и тд)",
+      "Сможешь описывать людей и говорить о чувствах",
     ],
   },
   {
     title: "Pre-intermediate (A2)",
-    cardItems: ["1500 слов", "2 месяца", "24 занятия"],
+    cardItems: ["+1500 слов", "2,5 месяца", "30 занятия"],
     descriptionItems: [
-      "Научишься использовать в речи все 12 времён, а также все модальные глаголы, conditionals, пассивный залог и косвенную речь",
-      "Сможешь с легкостью поддержать разговор на темы: тайм-менеджмент, отношения, здоровый образ жизни, проблемы экологии и современного общества",
-      "Сможешь провести любую операцию в банке, узнать все детали вашего состояния у доктора, а также решить любую проблему во время путешествия",
+      "Научишься владеть всеми 12 временами, модальными глаголами, условными предложениями, пассивным залогом и косвенной речью.",
+      "Сможешь легко говорить на темы, как отношения, здоровый образ жизни, экологические и социальные вопросы.",
+      "Научишься получать подробную информацию у врача и решать любые проблемы во время путешествий",
     ],
   },
   {
     title: "Intermediate (B1)",
-    cardItems: ["2000 слов", "3 месяца", "36 занятий"],
+    cardItems: ["+2000 слов", "3 месяца", "36 занятий"],
     descriptionItems: [
-      "Будешь себя уверенно и комфортно чувствовать при разговоре с иностранцами, а также с лёгкостью использовать все времена и сложные конструкции в речи",
-      "Научишься составлять резюме на работу, успешно проходить собеседования, а также вести бизнес-переговоры",
-      "Сможешь рассуждать на более глубокие темы, такие как: ментальное здоровье, разница поколений, психология разных стадий жизни, технологии и современное общество, самооценка и боди-позитив",
+      "Будешь уверенно общаться с иностранцами, свободно использовать времена и сложные конструкции.",
+      "Научишься составлять профессиональные резюме, успешно справляться с собеседованиями и вести деловые переговоры.",
+      "Сможешь говорить о глубоких темах, таких как психическое здоровье, технологии и современное общество, развивать уверенность и положительное отношение к своему уровню",
     ],
   },
   {
     title: "Upper-intermediate (B2)",
-    cardItems: ["3000 слов", "1 месяц", "12 занятий"],
+    cardItems: ["+3000 слов", "3,5 месяца", "40 занятий"],
     descriptionItems: [
-      "Сможешь использовать в речи advanced грамматику, например, complex subject и object, mixed conditionals и narrative fences",
-      "Сможешь рассуждать на академические темы, такие как: философия успехов и провалов, эффект FOMO/ JOMO, особенности человеческой памяти, чайлд-фри движение, теории заговоров и другие темы, которые расширят ваш кругозор",
-      "После прохождения этого уровня тебе в разы легче будет сдать международные экзамены TOEFL / IELTS / CAE , так как темы очень схожи с экзаменационными",
+      "После окончания этого курса ты сможешь мастерски применять продвинутую грамматику, включая сложные конструкции, смешанные условные предложения и структуры.",
+      "Ты сможешь обсуждать академические темы, такие как философия успехов и неудач, особенности человеческой памяти, теории заговоров и другие, что продвинет твой уровень.",
+      "А также, ты будешь намного увереннее готовиться к международным экзаменам TOEFL, IELTS, так как курс охватывает темы, близкие к экзаменационным",
     ],
   },
   {
     title: "English for travelers",
-    cardItems: ["3000 слов", "1 месяц", "12 занятий"],
+    cardItems: ["+2000 слов", "3 месяца", "30 занятий"],
     descriptionItems: [
-      "Сможешь использовать в речи advanced грамматику, например, complex subject и object, mixed conditionals и narrative fences",
-      "Сможешь рассуждать на академические темы, такие как: философия успехов и провалов, эффект FOMO/ JOMO, особенности человеческой памяти, чайлд-фри движение, теории заговоров и другие темы, которые расширят ваш кругозор",
-      "После прохождения этого уровня тебе в разы легче будет сдать международные экзамены TOEFL / IELTS / CAE , так как темы очень схожи с экзаменационными",
+      "Подготовишься к успешным коммуникациям и навигации на английском во время путешествий",
+      "Модули охватывают основы английского, общение, развлечения, безопасность и заканчиваются симуляциями путешествий",
+      "Курс разработан для уверенного общения за границей на английском",
     ],
   },
   {
     title: "Business English",
-    cardItems: ["3000 слов", "1 месяц", "12 занятий"],
+    cardItems: ["+2500 слов", "4 месяца", "40 занятий"],
+    module: true,
     descriptionItems: [
-      "Сможешь использовать в речи advanced грамматику, например, complex subject и object, mixed conditionals и narrative fences",
-      "Сможешь рассуждать на академические темы, такие как: философия успехов и провалов, эффект FOMO/ JOMO, особенности человеческой памяти, чайлд-фри движение, теории заговоров и другие темы, которые расширят ваш кругозор",
-      "После прохождения этого уровня тебе в разы легче будет сдать международные экзамены TOEFL / IELTS / CAE , так как темы очень схожи с экзаменационными",
+      "Основы бизнес-английского: представление, письменная и устная корреспонденция, переговоры.",
+      "Общение в деловой среде: собрания, проекты, клиенты, презентации.",
+      "Деловые навыки и терминология: управление временем, финансы, маркетинг.",
+      "Бизнес-путешествия и международные сделки: организация поездок, международные переговоры, культурные особенности.",
     ],
   },
   {
-    title: "Exams",
-    cardItems: ["3000 слов", "1 месяц", "12 занятий"],
+    title: "Подготовка к успешной сдаче международных экзаменов TOEFL, IELTS",
+    otherLayout: true,
+    module: true,
     descriptionItems: [
-      "Сможешь использовать в речи advanced грамматику, например, complex subject и object, mixed conditionals и narrative fences",
-      "Сможешь рассуждать на академические темы, такие как: философия успехов и провалов, эффект FOMO/ JOMO, особенности человеческой памяти, чайлд-фри движение, теории заговоров и другие темы, которые расширят ваш кругозор",
-      "После прохождения этого уровня тебе в разы легче будет сдать международные экзамены TOEFL / IELTS / CAE , так как темы очень схожи с экзаменационными",
+      "Грамматика и лексика",
+      "Навыки чтения и аудирования",
+      "Навыки письма и разговорной речи",
+      "Симуляция экзаменов и практическая подготовка",
     ],
   },
 ];
@@ -90,32 +96,73 @@ export const Process: FC = () => {
         <Swiper
           className=""
           cssMode={true}
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           slidesPerView={2}
           navigation
+          autoplay={{ delay: 3000 }}
         >
           {processItems.map((item) => (
-            <SwiperSlide style={{display: "flex", justifyContent: "center"}} key={item.title}>
-              <div className="process__description-item">
-                <span className="process__description-item-title">
-                  {item.title}
-                </span>
-                <div className="process__description-item-cards">
-                  {item.cardItems.map((item) => (
-                    <div key={item} className="process__description-item-card">
-                      <span>{item}</span>
+            <SwiperSlide
+              style={{ display: "flex", justifyContent: "center" }}
+              key={item.title}
+            >
+              {item.otherLayout ? (
+                <div className="process__description-item">
+                  <span className="process__description-item-title other">
+                    {item.title}
+                  </span>
+                  <div className="process__description-item-cards">
+                    <div className="process__description-item-card other">
+                      <span>
+                        Точный период подготовки зависит от уровня студента
+                      </span>
                     </div>
-                  ))}
+                  </div>
+                  <span className="process__description-item-goal">
+                    {item.module ? "Модули:" : "Goal:"}
+                  </span>
+                  <div className="process__description-item-descsHolder">
+                    {item.descriptionItems.map((item) => (
+                      <p key={item} className="process__description-item-desc">
+                        * {item}
+                      </p>
+                    ))}
+                  </div>
+                  <span className="process__description-item-goal">
+                    Завершение курса:
+                  </span>
+                  <div className="process__description-item-descsHolder">
+                    <p className="process__description-item-desc">* Интенсивная подготовка к конкретным экзаменам</p>
+                    <p className="process__description-item-desc">* Готовность к успешной сдаче международных экзаменов</p>
+                  </div>
                 </div>
-                <span className="process__description-item-goal">Goal:</span>
-                <div className="process__description-item-descsHolder">
-                  {item.descriptionItems.map((item) => (
-                    <p key={item} className="process__description-item-desc">
-                      {item}
-                    </p>
-                  ))}
+              ) : (
+                <div className="process__description-item">
+                  <span className="process__description-item-title">
+                    {item.title}
+                  </span>
+                  <div className="process__description-item-cards">
+                    {item.cardItems && item.cardItems.map((item) => (
+                      <div
+                        key={item}
+                        className="process__description-item-card"
+                      >
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <span className="process__description-item-goal">
+                    {item.module ? "Модули:" : "Goal:"}
+                  </span>
+                  <div className="process__description-item-descsHolder">
+                    {item.descriptionItems.map((item) => (
+                      <p key={item} className="process__description-item-desc">
+                        {item}
+                      </p>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
