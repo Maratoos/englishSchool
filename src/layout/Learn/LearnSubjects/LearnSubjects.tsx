@@ -58,7 +58,7 @@ export const LearnSubjects: FC = () => {
             {subjectsItems.map((item) => (
               <div
                 style={{
-                  width: item.buttonWidth,
+                  // width: item.buttonWidth,
                   backgroundColor: item.buttonColor,
                 }}
                 className="learn__subjects-item"

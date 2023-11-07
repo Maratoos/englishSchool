@@ -42,12 +42,6 @@
   margin-left: 50px;
 }
 
-.learn__subjects-itemsHolder {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 .learn__subjects-items {
   width: 600px;
   height: 200px;
@@ -57,6 +51,8 @@
 
 .learn__subjects-item {
   height: 45.133px;
+  width: fit-content;
+  padding: 2px 10px;
   border-radius: 44px;
   display: flex;
   justify-content: center;
@@ -84,7 +80,76 @@
 .learn__advantages-cards {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   width: 1500px;
   margin-top: 34px;
+}
+
+@media (max-width: 1520px) {
+  .learn__advantages-cards {
+    height: 500px;
+    flex-wrap: wrap;
+    width: 1000px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .learn__subjects-about {
+    width: 900px;
+  }
+
+  .learn__subjects-image {
+    width: 350px;
+    height: 300px;
+    margin-left: 0;
+  }
+
+  .learn__advantages {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 950px) {
+  .learn__subjects-about {
+    flex-direction: column;
+    justify-content: start;
+    width: 500px;
+    height: 600px;
+  }
+
+  .learn__subjects-itemsHolder {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .learn__subjects-items {
+    justify-content: center;
+    height: 300px;
+    width: 95%;
+  }
+
+  .learn__advantages-cards {
+    width: 750px;
+  }
+}
+
+@media (max-width: 550px) {
+  .learn__subjects-about {
+    width: 300px;
+  }
+
+  .learn__subjects-item {
+    height: 40px;
+    border-radius: 44px;
+  }
+  
+  .learn__subjects-item-text {
+    font-size: 14px;
+    line-height: 40px;
+  }
+
+  .learn__advantages-cards {
+    flex-wrap: wrap;
+    width: 500px;
+  }
 }

@@ -2,12 +2,14 @@ import { FC, useState } from "react";
 import "./greeting.css";
 import { Button } from "../../components/Button/Button";
 import { useSpring, animated } from "@react-spring/web";
-// import greeetingImage from "../../assets/images/greetingImage.png";
 import { Modal } from "../../components/Modal/Modal";
-import greetBack from "../../assets/images/greetBack.png";
+import { Quiz } from "./Quiz/Quiz";
+import { useDevice } from "../../hooks/UseDevice";
 
 export const Greeting: FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const mobileButton = useDevice(400);
+  
   const [bigTextProps] = useSpring(
     () => ({
       from: { x: -500, opacity: -2 },
@@ -26,15 +28,6 @@ export const Greeting: FC = () => {
     []
   );
 
-  // const [imageProps] = useSpring(
-  //   () => ({
-  //     from: { x: 3000, opacity: -5 },
-  //     to: { x: 0, opacity: 1 },
-  //     delay: 700,
-  //   }),
-  //   []
-  // );
-
   return (
     <>
       <section id="greeting" className="greeting">
@@ -50,20 +43,14 @@ export const Greeting: FC = () => {
               <Button
                 onClick={() => setModalActive(true)}
                 text="Проверь свой уровень тут"
-                width="350px"
+                width={mobileButton ? "250px" : "350px"}
               />
             </animated.div>
           </div>
-          {/* <animated.img
-            src={greeetingImage}
-            alt=""
-            style={imageProps}
-            className="greeting__inner-image"
-          /> */}
         </div>
       </section>
       <Modal active={modalActive} setActive={setModalActive}>
-        <div>lorem50</div>
+        <Quiz />
       </Modal>
     </>
   );

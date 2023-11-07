@@ -15,6 +15,7 @@ import { useCollection } from "../../hooks/useColection";
 import { IReview } from "../../models/models";
 import { CircularProgress } from "@mui/material";
 import { getCollection } from "../../hooks/getCollection";
+import { useDevice } from "../../hooks/UseDevice";
 
 export const Reviews: FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
@@ -28,6 +29,7 @@ export const Reviews: FC = () => {
     }
   );
   const formRef = useRef<HTMLFormElement | null>(null);
+  const mobile = useDevice(750)
   const { addDocument } = useCollection("recievedReviews");
   const { documents, isPending } = getCollection<IReview>("confirmedReviews");
 
@@ -104,7 +106,7 @@ export const Reviews: FC = () => {
           onClick={() => setModalActive(true)}
         />
       </section>
-      <Modal active={modalActive} setActive={setModalActive}>
+      <Modal width={mobile ? "70vw" : ""} active={modalActive} setActive={setModalActive}>
         <form ref={formRef} onSubmit={handleSubmit} className="reviewForm">
           <input
             required

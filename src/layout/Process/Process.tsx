@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Typography } from "../../components/Typography/Typography";
 import "./process.css";
 import { Button } from "../../components/Button/Button";
@@ -8,6 +8,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useDevice } from "../../hooks/UseDevice";
 
 type TypeProcessItem = {
   title: string;
@@ -89,6 +90,7 @@ const processItems: Array<TypeProcessItem> = [
 ];
 
 export const Process: FC = () => {
+  const mobileSwiper = useDevice(1200)
   return (
     <section id="process" className="process">
       <Typography text="Программа обучения" margin="55px 0 0 0" />
@@ -97,7 +99,7 @@ export const Process: FC = () => {
           className=""
           cssMode={true}
           modules={[Navigation, Autoplay]}
-          slidesPerView={2}
+          slidesPerView={mobileSwiper ? 1 : 2}
           navigation
           autoplay={{ delay: 3000 }}
         >
@@ -172,8 +174,7 @@ export const Process: FC = () => {
           onClick={() => scrollToSection("application")}
           backgroundColor="#530fad"
           text="Начать обучение"
-          width="249px"
-          margin="0 0 0 14px"
+          width="300px"
         />
         <span className="process__try-text">
           Оставь заявку прямо на сайте, и мы с тобой свяжемся

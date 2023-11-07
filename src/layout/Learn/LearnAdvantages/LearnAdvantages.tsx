@@ -47,7 +47,7 @@ const AdvantageCardItems: Array<TypeCardItem> = [
 export const LearnAdvantages: FC = () => {
   return (
     <div className="learn__advantages">
-      <Typography text="Учись с нами удобно и результативно" width="600px" />
+      <Typography text="Учись с нами удобно и результативно" />
       <div className="learn__advantages-cards">
         {AdvantageCardItems.map((item) => (
           <AdvantageCard key={item.title} item={item} />

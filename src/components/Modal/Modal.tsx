@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import "./index.css";
-import crossMark from "../../assets/icons/crossMark.svg"
 
 interface Props {
-  children: React.ReactNode;
+  width?: string;
   active: boolean;
+  children: React.ReactNode;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Modal: FC<Props> = ({ active, setActive, children }) => {
+export const Modal: FC<Props> = ({ active, setActive, children, width }) => {
   return (
     <div
       className={active ? "modal active" : "modal"}
@@ -17,8 +17,8 @@ export const Modal: FC<Props> = ({ active, setActive, children }) => {
       <div
         className={active ? "modal__content active" : "modal__content"}
         onClick={(e) => e.stopPropagation()}
+        style={{ width }}
       >
-        <img src={crossMark} className="modal__crossMark" onClick={() => setActive(false)} alt="" />
         {children}
       </div>
     </div>
