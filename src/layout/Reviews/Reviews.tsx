@@ -29,7 +29,7 @@ export const Reviews: FC = () => {
     }
   );
   const formRef = useRef<HTMLFormElement | null>(null);
-  const mobile = useDevice(750)
+  const mobile = useDevice(750);
   const { addDocument } = useCollection("recievedReviews");
   const { documents, isPending } = getCollection<IReview>("confirmedReviews");
 
@@ -77,19 +77,22 @@ export const Reviews: FC = () => {
                     <div className="item__innerContainer">
                       <p className="item__text">{review.review}</p>
                       <div className="item__userData">
-                        <PersonIcon
-                          sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
-                        />
-                        <span className="item__name">{review.name} </span>
+                        <div>
+                          <PersonIcon
+                            sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
+                          />
+                          <span className="item__name">{review.name} </span>
+                        </div>
+                        <pre> </pre>
                         {review.instName ? (
-                          <>
+                          <div>
                             <InstagramIcon
                               sx={{ margin: "0 5px -5px 0", color: "#FFFFFF" }}
                             />
                             <span className="item__inst">
                               {review.instName}
                             </span>
-                          </>
+                          </div>
                         ) : null}
                       </div>
                     </div>
@@ -106,7 +109,11 @@ export const Reviews: FC = () => {
           onClick={() => setModalActive(true)}
         />
       </section>
-      <Modal width={mobile ? "70vw" : ""} active={modalActive} setActive={setModalActive}>
+      <Modal
+        width={mobile ? "70vw" : ""}
+        active={modalActive}
+        setActive={setModalActive}
+      >
         <form ref={formRef} onSubmit={handleSubmit} className="reviewForm">
           <input
             required

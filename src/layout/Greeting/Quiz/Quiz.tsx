@@ -8,7 +8,7 @@ import "./index.css";
 import { Button } from "@mui/material";
 
 export const Quiz: FC = () => {
-  const [userAnswers, setUserAnswers] = useState<Array<string>>([]);
+  // const [userAnswers, setUserAnswers] = useState<Array<string>>([]);
   const [currentAnswerId, setCurrentAnswerId] = useState<number>(0);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
