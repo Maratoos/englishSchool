@@ -7,7 +7,7 @@ export const ProcessBottom: FC = () => {
     <section className="processBottom__container">
       <div className="processBottom__innerContainer">
         <div className="processBottom__image-outer">
-          <img src={heartEmoji} alt="" />
+          <img loading="lazy" src={heartEmoji} alt="" />
         </div>
         <div className="processBottom__desc-outer">
           <h3>Помощь и поддержка</h3>

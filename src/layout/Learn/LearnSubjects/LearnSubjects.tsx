@@ -52,7 +52,7 @@ export const LearnSubjects: FC = () => {
       <Typography text="Чему ты научишься:" margin="73px 0 0 0" />
       <span className="learn__subject-smallText">60% Разговорной речи и 40% грамматики</span>
       <div className="learn__subjects-about">
-        <img className="learn__subjects-image" src={learnEmoji} alt="" />
+        <img loading="lazy" className="learn__subjects-image" src={learnEmoji} alt="" />
         <div className="learn__subjects-itemsHolder">
           <div className="learn__subjects-items">
             {subjectsItems.map((item) => (

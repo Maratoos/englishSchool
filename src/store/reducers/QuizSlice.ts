@@ -7,6 +7,13 @@ type TypeInitialState = {
     userAnswers: Array<IUserAnswer>
 }
 
+const getCookie = (name: string): string | undefined => {
+    let matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
 const initialState: TypeInitialState = {
     userAnswers: [],
     correctAnswers: 0,
@@ -22,31 +29,28 @@ export const quizSlice = createSlice({
         },
         countCorrectAnswers(state) {
             state.correctAnswers = state.userAnswers.filter(item => item.answerIsCorrect === true).length
-            localStorage.setItem("correctAnswers", JSON.stringify(state.correctAnswers))
+            document.cookie = `${encodeURIComponent("correctAnswers")}=${encodeURIComponent(state.correctAnswers)}; path=/; max-age=2678400`
         },
         countUserLevel(state) {
             if (state.correctAnswers < 6) {
                 state.currentLevel = "Beginner";
-                localStorage.setItem("currentLevel", state.currentLevel)
             } else if (state.correctAnswers >= 7 && state.correctAnswers <= 13) {
                 state.currentLevel = "Elementary";
-                localStorage.setItem("currentLevel", state.currentLevel)
             } else if (state.correctAnswers >= 14 && state.correctAnswers <= 20) {
                 state.currentLevel = "Pre-Intermediate";
-                localStorage.setItem("currentLevel", state.currentLevel)
             } else if (state.correctAnswers >= 21 && state.correctAnswers <= 25) {
                 state.currentLevel = "Intermediate";
-                localStorage.setItem("currentLevel", state.currentLevel)
             } else {
                 state.currentLevel = "Upper-Intermediate";
-                localStorage.setItem("currentLevel", state.currentLevel)
             }
+            document.cookie = `${encodeURIComponent("currentLevel")}=${encodeURIComponent(state.currentLevel)}; path=/; max-age=2678400`
         },
         setDefaultValues(state) {
-            const savedCorrectAnswers = localStorage.getItem("correctAnswers")
+            const savedCorrectAnswers = getCookie("correctAnswers")
+            const savedCurrentLevel = getCookie("currentLevel")
 
-            state.correctAnswers = savedCorrectAnswers ? JSON.parse(savedCorrectAnswers) : 0
-            state.currentLevel = localStorage.getItem("currentLevel") || null
+            state.correctAnswers = savedCorrectAnswers ? Number(savedCorrectAnswers) : 0
+            state.currentLevel = savedCurrentLevel || null
             state.userAnswers = []
         }
     },

@@ -10,7 +10,10 @@ export const AfterQuiz: FC = () => {
       <div className="afterQuiz">
         <div>
           <p className="afterQuiz__level">{currentLevel}</p>
-          <p className="afterQuiz__description">{`Поздравляю, твой уровень ${currentLevel}, ты набрал ${correctAnswers} из 30 ответов, отличная работа`}</p>
+          <p className="afterQuiz__description">{`Поздравляю, твой уровень ${currentLevel}, ты набрал ${correctAnswers} из 30 ответов, отличная работа.`}</p>
+          <p className="afterQuiz__description">
+            Ты снова можешь попробовать пройти тест ровно через месяц
+          </p>
           <p className="afterQuiz__description">
             Также тебе доступна моя специальная программа обучения
           </p>
