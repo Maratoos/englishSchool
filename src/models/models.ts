@@ -17,3 +17,14 @@ export interface IReview {
     id?: string
     createdAt: Timestamp
 }
+
+export interface IUserAnswer {
+    answer: string;
+    answerIsCorrect: boolean;
+}
+
+export interface IQuiz {
+    question: string,
+    options: Array<IUserAnswer>,
+    id?: string
+}

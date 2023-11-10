@@ -11,6 +11,7 @@ import { Auth } from "./pages/Auth/Auth";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { useLocation } from "react-router-dom";
 import { Header } from "./layout/Header/Header";
+import { setDefaultValues } from "./store/reducers/QuizSlice";
 
 export const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,7 @@ export const App: FC = () => {
     const unsub = onAuthStateChanged(auth, async (_user) => {
       if (_user) {
         dispatch(setUser(_user));
+        dispatch(setDefaultValues());
       }
     });
 
