@@ -42,11 +42,16 @@ export const Greeting: FC = () => {
       <section id="greeting" className="greeting">
         <div className="greeting__inner">
           <div className="greeting__description">
+            <animated.h1 style={{...bigTextProps, fontWeight: "700"}} className="greeting__text">
+              Welcome to FaraPrism English School!
+            </animated.h1>
             <animated.h1 style={bigTextProps} className="greeting__text">
-              Welcome to FaraPrism English School! Я и мои опытные преподаватели
-              научим тебя любить английский язык. Присоединяйся к нашему
-              дружному сообществу и достигай успеха в английском. Ждем тебя на
-              уроке.
+              Я и мои опытные преподаватели научим тебя любить английский язык.
+              Присоединяйся к нашему дружному сообществу и достигай успеха в
+              английском.
+            </animated.h1>
+            <animated.h1 style={bigTextProps} className="greeting__text">
+              Ждем тебя на уроке.
             </animated.h1>
             <animated.div style={smallTextProps} className="greeting__test">
               <Button

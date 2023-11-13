@@ -21,8 +21,8 @@ export const App: FC = () => {
     const unsub = onAuthStateChanged(auth, async (_user) => {
       if (_user) {
         dispatch(setUser(_user));
-        dispatch(setDefaultValues());
       }
+      dispatch(setDefaultValues());
     });
 
     return () => unsub();
