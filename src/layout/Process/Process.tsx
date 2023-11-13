@@ -4,7 +4,7 @@ import "./process.css";
 import { Button } from "../../components/Button/Button";
 import { scrollToSection } from "../../hooks/scrollToSection";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -98,10 +98,9 @@ export const Process: FC = () => {
         <Swiper
           className=""
           cssMode={true}
-          modules={[Navigation, Autoplay]}
+          modules={[Navigation]}
           slidesPerView={mobileSwiper ? 1 : 2}
           navigation
-          autoplay={{ delay: 3000 }}
         >
           {processItems.map((item) => (
             <SwiperSlide
