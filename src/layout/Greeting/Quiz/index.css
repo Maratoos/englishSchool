@@ -48,7 +48,7 @@
   color: #330570;
   text-align: center;
   font-family: Gilroy;
-  font-size: 24px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 600;
   line-height: 22px;
@@ -58,11 +58,16 @@
   color: #330570;
   text-align: center;
   font-family: Gilroy;
-  font-size: 16px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: 18.5px;
   margin-top: 19px;
+}
+
+.afterQuiz__description > strong {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .arrow {
@@ -116,5 +121,17 @@
 
   .quiz {
     height: 400px;
+  }
+  
+  .afterQuiz {
+    height: 450px;
+  }
+
+  .afterQuiz__level {
+    font-size: 26px;
+  }
+
+  .afterQuiz__description {
+    font-size: 18px;
   }
 }

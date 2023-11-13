@@ -52,9 +52,16 @@ export const quizSlice = createSlice({
             state.correctAnswers = savedCorrectAnswers ? Number(savedCorrectAnswers) : 0
             state.currentLevel = savedCurrentLevel || null
             state.userAnswers = []
+        },
+        deleteCookies(state) {
+            state.correctAnswers = 0
+            state.currentLevel = ""
+            state.userAnswers.length = 0
+            document.cookie = `${encodeURIComponent("correctAnswers")}=${encodeURIComponent(state.correctAnswers)}; path=/; max-age=-1`
+            document.cookie = `${encodeURIComponent("currentLevel")}=${encodeURIComponent(state.currentLevel)}; path=/; max-age=-1`
         }
     },
 });
 
 export default quizSlice.reducer;
-export const { setUserAnswers, setDefaultValues, countCorrectAnswers, countUserLevel } = quizSlice.actions
+export const { setUserAnswers, setDefaultValues, countCorrectAnswers, countUserLevel, deleteCookies } = quizSlice.actions

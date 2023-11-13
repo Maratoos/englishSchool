@@ -1,10 +1,12 @@
 import { FC } from "react";
-import { useAppSelector } from "../../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { Button } from "@mui/material";
 import "./index.css";
+import { deleteCookies } from "../../../store/reducers/QuizSlice";
 
 export const AfterQuiz: FC = () => {
   const { currentLevel, correctAnswers } = useAppSelector((quiz) => quiz.quiz);
+  const dispatch = useAppDispatch();
   return (
     <>
       <div className="afterQuiz">
@@ -12,7 +14,10 @@ export const AfterQuiz: FC = () => {
           <p className="afterQuiz__level">{currentLevel}</p>
           <p className="afterQuiz__description">{`Поздравляю, твой уровень ${currentLevel}, ты набрал ${correctAnswers} из 30 ответов, отличная работа.`}</p>
           <p className="afterQuiz__description">
-            Ты снова можешь попробовать пройти тест ровно через месяц
+            У тебя хорошо получилось, но если ты хочешь перепройти тест, то{" "}
+            <strong onClick={() => dispatch(deleteCookies())}>
+              нажми на меня
+            </strong>
           </p>
           <p className="afterQuiz__description">
             Также тебе доступна моя специальная программа обучения
