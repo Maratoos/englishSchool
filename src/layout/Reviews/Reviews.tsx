@@ -75,7 +75,6 @@ export const Reviews: FC = () => {
                 >
                   <div className="item__container">
                     <div className="item__innerContainer">
-                      <p className="item__text">{review.review}</p>
                       <div className="item__userData">
                         <div>
                           <PersonIcon
@@ -95,6 +94,7 @@ export const Reviews: FC = () => {
                           </div>
                         ) : null}
                       </div>
+                      <p className="item__text">{review.review}</p>
                     </div>
                   </div>
                 </SwiperSlide>
