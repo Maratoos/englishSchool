@@ -16,7 +16,7 @@ export interface IReview {
     name: string;
     instName: string;
     review: string;
-    id?: string
+    id: string
     createdAt: Timestamp
 }
 
