@@ -2,9 +2,12 @@ import React, { ChangeEvent, FC, useState, useRef } from "react";
 import "./applicationForm.css";
 import { IApplication } from "../../models/models";
 import { useCollection } from "../../hooks/useColection";
+import { getCookie } from "../../hooks/getCookie";
 
 export const ApplicationForm: FC = () => {
-  const [application, setApplication] = useState<Omit<IApplication, "id" | "createdAt">>({
+  const [application, setApplication] = useState<
+    Omit<IApplication, "id" | "createdAt" | "currentLevel" | "correctAnswers">
+  >({
     name: "",
     email: "",
     country: "",
@@ -24,9 +27,13 @@ export const ApplicationForm: FC = () => {
 
   const handleSubmitt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Я сработал");
+    const dataFromCookie = {
+      currentLevel: getCookie("currentLevel") || null,
+      correctAnswers: Number(getCookie("correctAnswers")) || null,
+    };
+
     setButtonIsDisabled(true);
-    await addDocument<IApplication>(application);
+    await addDocument<IApplication>({...application, ...dataFromCookie} as IApplication);
     formRef.current?.reset();
     setButtonIsDisabled(false);
   };

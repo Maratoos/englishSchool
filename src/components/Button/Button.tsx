@@ -1,12 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { styled } from "@mui/material";
 import MButton from "@mui/material/Button";
 
-interface CustomProps
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+interface CustomProps extends React.DetailedHTMLProps< React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   text: string;
   margin?: string;
   backgroundColor?: string;
@@ -35,23 +31,25 @@ const CustomButton = styled(MButton)({
   },
 });
 
-export const Button: FC<CustomProps> = ({
-  text,
-  onClick,
-  margin,
-  width,
-  backgroundColor = "#2e16b1",
-  type,
-  disabled,
-}) => {
-  return (
-    <CustomButton
-      disabled={disabled}
-      type={type}
-      style={{ margin, width, backgroundColor }}
-      onClick={onClick}
-    >
-      {text}
-    </CustomButton>
-  );
-};
+export const Button: FC<CustomProps> = memo(
+  ({
+    text,
+    onClick,
+    margin,
+    width,
+    backgroundColor = "#2e16b1",
+    type,
+    disabled,
+  }) => {
+    return (
+      <CustomButton
+        disabled={disabled}
+        type={type}
+        style={{ margin, width, backgroundColor }}
+        onClick={onClick}
+      >
+        {text}
+      </CustomButton>
+    );
+  }
+);

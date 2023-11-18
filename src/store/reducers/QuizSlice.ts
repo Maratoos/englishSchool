@@ -1,17 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUserAnswer } from "../../models/models";
+import { getCookie } from "../../hooks/getCookie";
 
 type TypeInitialState = {
     currentLevel: string | null,
     correctAnswers: number;
     userAnswers: Array<IUserAnswer>
-}
-
-const getCookie = (name: string): string | undefined => {
-    let matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
 const initialState: TypeInitialState = {

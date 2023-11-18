@@ -7,7 +7,9 @@ export interface IApplication {
     whatsAppNumber: string;
     checked: boolean;
     id: string,
-    createdAt: Timestamp
+    createdAt: Timestamp,
+    correctAnswers: number | null,
+    currentLevel: string | null
 }
 
 export interface IReview {
