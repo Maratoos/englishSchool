@@ -5,9 +5,7 @@ import { useCollection } from "../../hooks/useColection";
 import { getCookie } from "../../hooks/getCookie";
 
 export const ApplicationForm: FC = () => {
-  const [application, setApplication] = useState<
-    Omit<IApplication, "id" | "createdAt" | "currentLevel" | "correctAnswers">
-  >({
+  const [application, setApplication] = useState<Omit<IApplication, "id" | "createdAt" | "currentLevel" | "correctAnswers">>({
     name: "",
     email: "",
     country: "",
@@ -17,16 +15,23 @@ export const ApplicationForm: FC = () => {
   const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(false);
   const formRef = useRef<HTMLFormElement | null>(null);
   const { addDocument } = useCollection("applications");
+  const savedIsApplicaionAlreadyAdded = localStorage.getItem(
+    "savedIsApplicaionAlreadyAdded"
+  );
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setApplication((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmitt = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitt = async (e: React.FormEvent<HTMLFormElement>): Promise<void | undefined> => {
     e.preventDefault();
+    if(!!savedIsApplicaionAlreadyAdded) {
+      return 
+    }
+
     const dataFromCookie = {
       currentLevel: getCookie("currentLevel") || null,
       correctAnswers: Number(getCookie("correctAnswers")) || null,
@@ -34,6 +39,7 @@ export const ApplicationForm: FC = () => {
 
     setButtonIsDisabled(true);
     await addDocument<IApplication>({...application, ...dataFromCookie} as IApplication);
+    localStorage.setItem("savedIsApplicaionAlreadyAdded", JSON.stringify(true));
     formRef.current?.reset();
     setButtonIsDisabled(false);
   };
@@ -51,6 +57,7 @@ export const ApplicationForm: FC = () => {
                 name="name"
                 type="text"
                 required
+                maxLength={30}
               />
               <div className="underline"></div>
               <label>Имя</label>
@@ -62,6 +69,7 @@ export const ApplicationForm: FC = () => {
                 name="country"
                 type="text"
                 required
+                maxLength={50}
               />
               <div className="underline"></div>
               <label>Страна</label>
@@ -75,6 +83,7 @@ export const ApplicationForm: FC = () => {
                 name="email"
                 type="email"
                 required
+                maxLength={70}
               />
               <div className="underline"></div>
               <label>Email</label>
@@ -86,6 +95,7 @@ export const ApplicationForm: FC = () => {
                 name="whatsAppNumber"
                 type="text"
                 required
+                maxLength={70}
               />
               <div className="underline"></div>
               <label>Номер WhatsApp(в межд. форматe +996)</label>
@@ -96,23 +106,10 @@ export const ApplicationForm: FC = () => {
             disabled={buttonIsDisabled}
             className="submit-btn"
           >
-            Подтвердить
+            {!!savedIsApplicaionAlreadyAdded ? "Заявка отправлена" : "Подтвердить"}
           </button>
         </form>
       </div>
     </section>
   );
 };
-
-{
-  /* <div className="form-row submit-btn">
-            <div className="input-data">
-              <div className="inner"></div>
-              <input
-                disabled={buttonIsDisabled}
-                type="submit"
-                value="Подтвердить"
-              />
-            </div>
-          </div> */
-}

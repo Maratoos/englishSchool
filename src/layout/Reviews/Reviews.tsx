@@ -32,25 +32,30 @@ export const Reviews: FC = () => {
   const mobile = useDevice(750);
   const { addDocument } = useCollection("recievedReviews");
   const { documents, isPending } = getCollection<IReview>("confirmedReviews");
+  const savedIsReviewAlreadyAdded = localStorage.getItem(
+    "isReviewAlreadyAdded"
+  );
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setModalInfo((prev) => ({
       ...prev,
-      [event.target.name]: event.target.value,
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<undefined | void> => {
     e.preventDefault();
-    setIsLoading(true);
-    await addDocument<IReview>(modalInfo);
-    formRef.current?.reset();
-    setIsLoading(false);
-    setTimeout(() => {
+    if (!!savedIsReviewAlreadyAdded) {
+      return;
+    } else {
+      setIsLoading(true);
+      await addDocument<IReview>(modalInfo);
+      localStorage.setItem("isReviewAlreadyAdded", JSON.stringify(true));
+      formRef.current?.reset();
+      setLettersCounter(0)
+      setIsLoading(false);
       setModalActive(false);
-    }, 2000);
+    }
   };
 
   return (
@@ -123,6 +128,7 @@ export const Reviews: FC = () => {
             onChange={handleChange}
             autoComplete="Name"
             name="name"
+            maxLength={30}
           />
           <input
             required
@@ -132,6 +138,7 @@ export const Reviews: FC = () => {
             onChange={handleChange}
             autoComplete="instagram"
             name="instName"
+            maxLength={30}
           />
           <textarea
             required
@@ -151,7 +158,11 @@ export const Reviews: FC = () => {
               margin="20px 0"
               width="200px"
               type="submit"
-              text="Подтвердить"
+              text={`${
+                !!savedIsReviewAlreadyAdded
+                  ? "Отзыв оставлен"
+                  : "Подтвердить"
+              }`}
               backgroundColor="#8243d6"
             />
             {isLoading && <CircularProgress size={60} sx={{ marginLeft: 4 }} />}
