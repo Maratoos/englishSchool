@@ -1,23 +1,29 @@
 import React, { FC, useState } from "react";
-import { IReview } from "../../../../models/models";
-import { Modal } from "../../../../components/Modal/Modal";
+import { IReview } from "../../../models/models";
+import { Modal } from "../../../components/Modal/Modal";
 import { TextField, Button } from "@mui/material";
-import { useCollection } from "../../../../hooks/useColection";
+import { useCollection } from "../../../hooks/useColection";
 
 interface Props {
   active: boolean;
   document: IReview;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  collectionName: string;
 }
 
-export const ChangeReview: FC<Props> = ({ active, setActive, document }) => {
+export const ChangeReview: FC<Props> = ({
+  active,
+  setActive,
+  document,
+  collectionName,
+}) => {
   const [newData, setNewData] = useState<Omit<IReview, "id" | "createdAt">>({
     name: document.name,
     instName: document.instName,
     review: document.review,
   });
   const [isPending, setIsPending] = useState<boolean>(false);
-  const { updateDocument } = useCollection("confirmedReviews");
+  const { updateDocument } = useCollection(collectionName);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewData((prev) => ({

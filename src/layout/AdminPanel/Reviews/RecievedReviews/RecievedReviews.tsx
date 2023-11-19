@@ -16,12 +16,13 @@ import { IReview } from "../../../../models/models";
 import { formatDate } from "../../../../hooks/formatDate";
 import { ChangeReview } from "../ChangeReview";
 
-export const ConfirmedReviews: FC = () => {
+export const ReceivedReviews: FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [docToChange, setDocToChange] = useState<IReview | null>(null);
   const { documents, error, isPending } =
-    getCollection<IReview>("confirmedReviews");
-  const { deleteDocument } = useCollection("confirmedReviews");
+    getCollection<IReview>("recievedReviews");
+  const { deleteDocument } = useCollection("recievedReviews");
+  const { addDocument } = useCollection("confirmedReviews");
 
   const handleDeleteDocument = async (docId: string): Promise<void> => {
     await deleteDocument(docId);
@@ -32,13 +33,17 @@ export const ConfirmedReviews: FC = () => {
     setDocToChange(doc);
   };
 
+  const handleAddReview = async (doc: IReview): Promise<void> => {
+    const { id, ...reviewWithoutId } = doc;
+
+    await addDocument<IReview>(reviewWithoutId)
+    await deleteDocument(id)
+  };
+
   return (
     <>
-      <Typography
-        text="Отзывы показанные на странице:"
-        margin="50px 0 50px 0"
-      />
-      <TableContainer sx={{ width: 1500 }} component={Paper}>
+      <Typography text="Отзывы от пользователей:" margin="50px 0 50px 0" />
+      <TableContainer sx={{ width: 1500, marginBottom: "50px" }} component={Paper}>
         <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
           <TableHead>
             <TableRow>
@@ -48,6 +53,7 @@ export const ConfirmedReviews: FC = () => {
               <TableCell align="right">Отзыв</TableCell>
               <TableCell align="right">Удалить отзыв</TableCell>
               <TableCell align="right">Изменить отзыв</TableCell>
+              <TableCell align="right">Добавить на страницу</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -88,6 +94,14 @@ export const ConfirmedReviews: FC = () => {
                       Изменить
                     </Button>
                   </TableCell>
+                  <TableCell align="right">
+                    <Button
+                      onClick={() => handleAddReview(doc)}
+                      variant="contained"
+                    >
+                      Добавить
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
@@ -96,7 +110,7 @@ export const ConfirmedReviews: FC = () => {
       {docToChange && (
         <ChangeReview
           key={docToChange.id}
-          collectionName="confirmedReviews"
+          collectionName="recievedReviews"
           active={modalActive}
           setActive={setModalActive}
           document={docToChange}
