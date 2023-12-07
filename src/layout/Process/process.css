@@ -59,7 +59,9 @@
 }
 
 .process__description-item-card {
-  width: 90px;
+  width: fit-content;
+  min-width: 90px;
+  max-width: 360px;
   height: 90px;
   margin-left: 10px;
   border-radius: 20px;

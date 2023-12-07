@@ -30,7 +30,7 @@ export const App: FC = () => {
 
   return (
     <>
-      {location.pathname !== "/admin" && location.pathname !== "/auth" && (
+      {location.pathname === "/" && (
         <Header />
       )}
       <Routes>

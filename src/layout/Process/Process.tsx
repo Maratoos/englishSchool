@@ -17,7 +17,9 @@ type TypeProcessItem = {
   cardItems?: Array<string>;
   descriptionItems: Array<string>;
 };
-
+// cardItems: ["+500 слов", "2 месяца", "24 занятия"],
+// Сможешь говорить во времяasdddddddd  asdasdasda sdas das asddddddddddddd a sdas asdsa das das aa sdasdasd wqeqw asd asasdas asd asdasas as dasd asd as dasd as dasd asdqweq wddd путешествий(Заказывать
+// Подготовка к успешной сдаче международных экзаменов TOEFL, IELTS
 const processItems: Array<TypeProcessItem> = [
   {
     title: "Elementary (A1)",
@@ -89,8 +91,26 @@ const processItems: Array<TypeProcessItem> = [
   },
 ];
 
+const newProcessItems = [
+  {
+    courseName: "Elementary (A1)",
+    cardItems: [
+      {
+        text: "+500 слов",
+      },
+      {
+        text: "2 месяца",
+      },
+      {
+        text: "24 занятия",
+      },
+    ],
+    
+  },
+];
+
 export const Process: FC = () => {
-  const mobileSwiper = useDevice(1200)
+  const mobileSwiper = useDevice(1200);
   return (
     <section id="process" className="process">
       <Typography text="Программа обучения" margin="55px 0 0 0" />
@@ -133,8 +153,12 @@ export const Process: FC = () => {
                     Завершение курса:
                   </span>
                   <div className="process__description-item-descsHolder">
-                    <p className="process__description-item-desc">* Интенсивная подготовка к конкретным экзаменам</p>
-                    <p className="process__description-item-desc">* Готовность к успешной сдаче международных экзаменов</p>
+                    <p className="process__description-item-desc">
+                      * Интенсивная подготовка к конкретным экзаменам
+                    </p>
+                    <p className="process__description-item-desc">
+                      * Готовность к успешной сдаче международных экзаменов
+                    </p>
                   </div>
                 </div>
               ) : (
@@ -143,14 +167,15 @@ export const Process: FC = () => {
                     {item.title}
                   </span>
                   <div className="process__description-item-cards">
-                    {item.cardItems && item.cardItems.map((item) => (
-                      <div
-                        key={item}
-                        className="process__description-item-card"
-                      >
-                        <span>{item}</span>
-                      </div>
-                    ))}
+                    {item.cardItems &&
+                      item.cardItems.map((item) => (
+                        <div
+                          key={item}
+                          className="process__description-item-card"
+                        >
+                          <span>{item}</span>
+                        </div>
+                      ))}
                   </div>
                   <span className="process__description-item-goal">
                     {item.module ? "Модули:" : "Goal:"}
