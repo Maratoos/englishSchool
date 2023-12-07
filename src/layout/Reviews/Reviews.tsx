@@ -17,17 +17,29 @@ import { CircularProgress } from "@mui/material";
 import { getCollection } from "../../hooks/getCollection";
 import { useDevice } from "../../hooks/UseDevice";
 
+interface IlettersCounter {
+  name: number;
+  instName: number;
+  review: number;
+}
+
+const initialLettersCounter: IlettersCounter = {
+  name: 0,
+  instName: 0,
+  review: 0,
+};
+
+const initialModalInfo: Omit<IReview, "id" | "createdAt"> = {
+  name: "",
+  instName: "",
+  review: "",
+};
+
 export const Reviews: FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [lettersCounter, setLettersCounter] = useState<number>(0);
-  const [modalInfo, setModalInfo] = useState<Omit<IReview, "id" | "createdAt">>(
-    {
-      name: "",
-      instName: "",
-      review: "",
-    }
-  );
+  const [lettersCounter, setLettersCounter] = useState(initialLettersCounter);
+  const [modalInfo, setModalInfo] = useState(initialModalInfo);
   const formRef = useRef<HTMLFormElement | null>(null);
   const mobile = useDevice(750);
   const { addDocument } = useCollection("recievedReviews");
@@ -36,26 +48,29 @@ export const Reviews: FC = () => {
     "isReviewAlreadyAdded"
   );
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    setModalInfo((prev) => ({
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    setModalInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setLettersCounter((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.length,
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<undefined | void> => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    if (!!savedIsReviewAlreadyAdded) {
-      return;
-    } else {
-      setIsLoading(true);
-      await addDocument<IReview>(modalInfo);
-      localStorage.setItem("isReviewAlreadyAdded", JSON.stringify(true));
-      formRef.current?.reset();
-      setLettersCounter(0)
-      setIsLoading(false);
-      setModalActive(false);
-    }
+
+    setIsLoading(true);
+    await addDocument<IReview>(modalInfo);
+    localStorage.setItem("isReviewAlreadyAdded", JSON.stringify(true));
+    formRef.current?.reset();
+    setLettersCounter(initialLettersCounter);
+    setModalInfo(initialModalInfo);
+    setIsLoading(false);
+    setModalActive(false);
   };
 
   return (
@@ -120,52 +135,61 @@ export const Reviews: FC = () => {
         setActive={setModalActive}
       >
         <form ref={formRef} onSubmit={handleSubmit} className="reviewForm">
-          <input
-            required
-            type="text"
-            className="reviewInput"
-            placeholder="Имя"
-            onChange={handleChange}
-            autoComplete="Name"
-            name="name"
-            maxLength={30}
-          />
-          <input
-            required
-            type="text"
-            className="reviewInput"
-            placeholder="Instagram"
-            onChange={handleChange}
-            autoComplete="instagram"
-            name="instName"
-            maxLength={30}
-          />
-          <textarea
-            required
-            id="textArea"
-            className="reviewInput"
-            placeholder="Твой отзыв"
-            onChange={(e) => {
-              handleChange(e);
-              setLettersCounter(e.target.value.length);
-            }}
-            name="review"
-            maxLength={300}
-          ></textarea>
-          <p className="counter">{`${lettersCounter}/300`}</p>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Button
-              margin="20px 0"
-              width="200px"
-              type="submit"
-              text={`${
-                !!savedIsReviewAlreadyAdded
-                  ? "Отзыв оставлен"
-                  : "Подтвердить"
-              }`}
-              backgroundColor="#8243d6"
+          <div>
+            <input
+              required
+              type="text"
+              className="reviewInput"
+              placeholder="Имя"
+              onChange={handleChange}
+              autoComplete="Name"
+              name="name"
+              maxLength={30}
             />
-            {isLoading && <CircularProgress size={60} sx={{ marginLeft: 4 }} />}
+            <p className="counter">{`${lettersCounter.name}/30`}</p>
+          </div>
+          <div>
+            <input
+              required
+              type="text"
+              className="reviewInput"
+              placeholder="Instagram"
+              onChange={handleChange}
+              autoComplete="instagram"
+              name="instName"
+              maxLength={30}
+              style={{ marginTop: "10px" }}
+            />
+            <p className="counter">{`${lettersCounter.instName}/30`}</p>
+          </div>
+          <div>
+            <textarea
+              required
+              id="textArea"
+              className="reviewInput"
+              placeholder="Твой отзыв"
+              onChange={handleChange}
+              name="review"
+              maxLength={300}
+              style={{ height: "100px", marginTop: "40px" }}
+            ></textarea>
+            <p className="counter">{`${lettersCounter.review}/300`}</p>
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {!isLoading ? (
+              <Button
+                margin="20px 0"
+                width="200px"
+                type="submit"
+                disabled={!!savedIsReviewAlreadyAdded}
+                text={`${
+                  !!savedIsReviewAlreadyAdded ? "Отзыв оставлен" : "Подтвердить"
+                }`}
+                backgroundColor="#8243d6"
+              />
+            ) : (
+              <CircularProgress size={60} sx={{ marginTop: 2 }} color="secondary" />
+            )}
           </div>
         </form>
       </Modal>

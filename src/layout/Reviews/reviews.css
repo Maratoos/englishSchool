@@ -87,12 +87,11 @@
   font-family: Gilroy;
   outline: none;
   padding-left: 13px;
-  margin-top: 40px;
   resize: none;
 }
 
-.reviewInput:nth-child(3) {
-  height: 70px;
+.reviewInput:last-child {
+  height: 100px;
 }
 
 .counter {

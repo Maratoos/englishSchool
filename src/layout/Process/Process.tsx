@@ -91,23 +91,23 @@ const processItems: Array<TypeProcessItem> = [
   },
 ];
 
-const newProcessItems = [
-  {
-    courseName: "Elementary (A1)",
-    cardItems: [
-      {
-        text: "+500 слов",
-      },
-      {
-        text: "2 месяца",
-      },
-      {
-        text: "24 занятия",
-      },
-    ],
+// const newProcessItems = [
+//   {
+//     courseName: "Elementary (A1)",
+//     cardItems: [
+//       {
+//         text: "+500 слов",
+//       },
+//       {
+//         text: "2 месяца",
+//       },
+//       {
+//         text: "24 занятия",
+//       },
+//     ],
     
-  },
-];
+//   },
+// ];
 
 export const Process: FC = () => {
   const mobileSwiper = useDevice(1200);
