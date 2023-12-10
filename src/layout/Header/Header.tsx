@@ -31,8 +31,7 @@ export const Header: FC = () => {
     <header className="header__outer">
       <div className="header__inner">
         <div className="logo" onClick={() => scrollToSection("greeting")}>
-          <span className="logo__text-top">Fara</span>
-          <span className="logo__text-bottom">Prism</span>
+          <span className="logo__text">FaraPrism</span>
         </div>
         <nav className="navbar">
           <ul className="navbar__items">

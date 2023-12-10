@@ -24,14 +24,15 @@
   cursor: pointer;
 }
 
-.logo__text-top,
-.logo__text-bottom {
+.logo__text {
   color: #531b9a;
   font-family: Gilroy;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 104.4%;
+  word-wrap: break-word;
+  width: 40px;
 }
 
 .navbar {
