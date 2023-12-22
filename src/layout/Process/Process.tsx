@@ -16,10 +16,9 @@ type TypeProcessItem = {
   otherLayout?: boolean;
   cardItems?: Array<string>;
   descriptionItems: Array<string>;
+  bottomCard?: boolean;
 };
-// cardItems: ["+500 слов", "2 месяца", "24 занятия"],
-// Сможешь говорить во времяasdddddddd  asdasdasda sdas das asddddddddddddd a sdas asdsa das das aa sdasdasd wqeqw asd asasdas asd asdasas as dasd asd as dasd as dasd asdqweq wddd путешествий(Заказывать
-// Подготовка к успешной сдаче международных экзаменов TOEFL, IELTS
+
 const processItems: Array<TypeProcessItem> = [
   {
     title: "Elementary (A1)",
@@ -30,15 +29,17 @@ const processItems: Array<TypeProcessItem> = [
       "Научишься свободно говорить на базовые темы(О себе, семье, погоде, хобби и тд)",
       "Сможешь описывать людей и говорить о чувствах",
     ],
+    bottomCard: true,
   },
   {
     title: "Pre-intermediate (A2)",
-    cardItems: ["+1500 слов", "2,5 месяца", "30 занятия"],
+    cardItems: ["+1500 слов", "2,5 месяца", "30 занятий"],
     descriptionItems: [
       "Научишься владеть всеми 12 временами, модальными глаголами, условными предложениями, пассивным залогом и косвенной речью.",
       "Сможешь легко говорить на темы, как отношения, здоровый образ жизни, экологические и социальные вопросы.",
       "Научишься получать подробную информацию у врача и решать любые проблемы во время путешествий",
     ],
+    bottomCard: true,
   },
   {
     title: "Intermediate (B1)",
@@ -48,6 +49,7 @@ const processItems: Array<TypeProcessItem> = [
       "Научишься составлять профессиональные резюме, успешно справляться с собеседованиями и вести деловые переговоры.",
       "Сможешь говорить о глубоких темах, таких как психическое здоровье, технологии и современное общество, развивать уверенность и положительное отношение к своему уровню",
     ],
+    bottomCard: true,
   },
   {
     title: "Upper-intermediate (B2)",
@@ -57,6 +59,7 @@ const processItems: Array<TypeProcessItem> = [
       "Ты сможешь обсуждать академические темы, такие как философия успехов и неудач, особенности человеческой памяти, теории заговоров и другие, что продвинет твой уровень.",
       "А также, ты будешь намного увереннее готовиться к международным экзаменам TOEFL, IELTS, так как курс охватывает темы, близкие к экзаменационным",
     ],
+    bottomCard: false,
   },
   {
     title: "English for travelers",
@@ -66,6 +69,7 @@ const processItems: Array<TypeProcessItem> = [
       "Модули охватывают основы английского, общение, развлечения, безопасность и заканчиваются симуляциями путешествий",
       "Курс разработан для уверенного общения за границей на английском",
     ],
+    bottomCard: true,
   },
   {
     title: "Business English",
@@ -77,6 +81,7 @@ const processItems: Array<TypeProcessItem> = [
       "Деловые навыки и терминология: управление временем, финансы, маркетинг.",
       "Бизнес-путешествия и международные сделки: организация поездок, международные переговоры, культурные особенности.",
     ],
+    bottomCard: true,
   },
   {
     title: "Подготовка к успешной сдаче международных экзаменов TOEFL, IELTS",
@@ -88,29 +93,13 @@ const processItems: Array<TypeProcessItem> = [
       "Навыки письма и разговорной речи",
       "Симуляция экзаменов и практическая подготовка",
     ],
+    bottomCard: true,
   },
 ];
 
-// const newProcessItems = [
-//   {
-//     courseName: "Elementary (A1)",
-//     cardItems: [
-//       {
-//         text: "+500 слов",
-//       },
-//       {
-//         text: "2 месяца",
-//       },
-//       {
-//         text: "24 занятия",
-//       },
-//     ],
-    
-//   },
-// ];
-
 export const Process: FC = () => {
-  const mobileSwiper = useDevice(1200);
+  const screenWidth = useDevice(1200);
+  const mobileSwiper = useDevice(650);
   return (
     <section id="process" className="process">
       <Typography text="Программа обучения" margin="55px 0 0 0" />
@@ -119,7 +108,7 @@ export const Process: FC = () => {
           className=""
           cssMode={true}
           modules={[Navigation]}
-          slidesPerView={mobileSwiper ? 1 : 2}
+          slidesPerView={screenWidth ? 1 : 2}
           navigation
         >
           {processItems.map((item) => (
@@ -167,15 +156,25 @@ export const Process: FC = () => {
                     {item.title}
                   </span>
                   <div className="process__description-item-cards">
-                    {item.cardItems &&
-                      item.cardItems.map((item) => (
-                        <div
-                          key={item}
-                          className="process__description-item-card"
-                        >
-                          <span>{item}</span>
-                        </div>
-                      ))}
+                    {item.cardItems && item.bottomCard && mobileSwiper
+                      ? item.cardItems
+                          .filter((_, id) => id !== 2)
+                          .map((item) => (
+                            <div
+                              key={item}
+                              className="process__description-item-card"
+                            >
+                              <span>{item}</span>
+                            </div>
+                          ))
+                      : item.cardItems?.map((item) => (
+                          <div
+                            key={item}
+                            className="process__description-item-card"
+                          >
+                            <span>{item}</span>
+                          </div>
+                        ))}
                   </div>
                   <span className="process__description-item-goal">
                     {item.module ? "Модули:" : "Goal:"}
@@ -187,6 +186,11 @@ export const Process: FC = () => {
                       </p>
                     ))}
                   </div>
+                  {item.bottomCard && mobileSwiper && (
+                    <div className="process__description-item-card bottomCard">
+                      <span>{item.cardItems && item.cardItems[2]}</span>
+                    </div>
+                  )}
                 </div>
               )}
             </SwiperSlide>

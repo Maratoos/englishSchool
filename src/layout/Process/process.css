@@ -137,6 +137,13 @@
   margin-left: 24px;
 }
 
+.bottomCard {
+  margin: 0 auto;
+  text-align: center;
+
+  margin-top: 30px;
+}
+
 @media (max-width: 1200px) {
   .process__description {
     width: 600px;
