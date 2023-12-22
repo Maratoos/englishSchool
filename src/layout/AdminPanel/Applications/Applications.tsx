@@ -28,7 +28,7 @@ export const Applications: FC = () => {
   return (
     <>
       <Typography text="Все заявки:" margin="0 0 50px 0" />
-      <TableContainer sx={{ width: 1500 }} component={Paper}>
+      <TableContainer sx={{ width: 1200 }} component={Paper}>
         <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
           <TableHead>
             <TableRow>
@@ -60,17 +60,17 @@ export const Applications: FC = () => {
                   <TableCell align="right">{doc.country}</TableCell>
                   <TableCell align="right">{doc.whatsAppNumber}</TableCell>
                   <TableCell align="right">
-                    {doc.currentLevel ? doc.currentLevel : "Тест не пройден"}
+                    {doc.currentLevel ? doc.currentLevel : "Не пройден"}
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="right" width={100}>
                     {doc.correctAnswers
                       ? `${doc.correctAnswers}/30`
-                      : "Тест не пройден"}
+                      : "Не пройден"}
                   </TableCell>
                   <TableCell align="right">
                     {formatDate(doc.createdAt)}
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell align="right" width={90}>
                     <Checkbox
                       checked={doc.checked}
                       onChange={(e) =>

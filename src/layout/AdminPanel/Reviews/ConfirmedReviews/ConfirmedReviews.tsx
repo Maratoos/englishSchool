@@ -38,16 +38,16 @@ export const ConfirmedReviews: FC = () => {
         text="Отзывы показанные на странице:"
         margin="50px 0 50px 0"
       />
-      <TableContainer sx={{ width: 1500 }} component={Paper}>
+      <TableContainer sx={{ width: 1200 }} component={Paper}>
         <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell>Имя</TableCell>
-              <TableCell align="right">Instagram</TableCell>
-              <TableCell align="right">Дата создания</TableCell>
-              <TableCell align="right">Отзыв</TableCell>
-              <TableCell align="right">Удалить отзыв</TableCell>
-              <TableCell align="right">Изменить отзыв</TableCell>
+              <TableCell sx={{padding: "8px"}}>Имя</TableCell>
+              <TableCell sx={{padding: "8px"}} align="right">Instagram</TableCell>
+              <TableCell sx={{padding: "8px"}} align="right">Дата создания</TableCell>
+              <TableCell sx={{padding: "8px"}} align="right">Отзыв</TableCell>
+              <TableCell sx={{padding: "8px"}} align="right">Удалить отзыв</TableCell>
+              <TableCell sx={{padding: "8px"}} align="right">Изменить отзыв</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -60,19 +60,19 @@ export const ConfirmedReviews: FC = () => {
                   key={doc.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
+                  <TableCell sx={{padding: "8px"}} component="th" scope="row" width={125}>
                     {doc.name}
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell sx={{padding: "8px"}} align="right" width={150}>
                     {doc.instName ? doc.instName : "Нет"}
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell sx={{padding: "8px"}} align="right" width={100}>
                     {formatDate(doc.createdAt)}
                   </TableCell>
-                  <TableCell align="right" width={500}>
-                    {doc.review}
+                  <TableCell sx={{padding: "8px"}} align="right" width={300}>
+                    {doc.review.slice(0, 50)}...
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell sx={{padding: "8px"}} align="right" width={150}>
                     <Button
                       onClick={() => handleDeleteDocument(doc.id)}
                       variant="contained"
@@ -80,7 +80,7 @@ export const ConfirmedReviews: FC = () => {
                       Удалить
                     </Button>
                   </TableCell>
-                  <TableCell align="right">
+                  <TableCell sx={{padding: "8px"}} align="right" width={150}>
                     <Button
                       onClick={() => handleModal(doc)}
                       variant="contained"
