@@ -12,9 +12,9 @@ export const AfterQuiz: FC = () => {
       <div className="afterQuiz">
         <div>
           <p className="afterQuiz__level">{currentLevel}</p>
-          <p className="afterQuiz__description">{`Поздравляю, твой уровень ${currentLevel}, ты набрал ${correctAnswers} из 30 ответов, отличная работа.`}</p>
+          <p className="afterQuiz__description">{`Твой уровень ${currentLevel}, ты набрал(-а) ${correctAnswers}/30 ответов`}</p>
           <p className="afterQuiz__description">
-            У тебя хорошо получилось, но если ты хочешь перепройти тест, то{" "}
+            Если хочешь перепройти тест, то {" "}
             <strong onClick={() => dispatch(deleteCookies())}>
               нажми на меня
             </strong>
