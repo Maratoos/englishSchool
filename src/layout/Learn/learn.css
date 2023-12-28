@@ -142,7 +142,7 @@
     height: 40px;
     border-radius: 44px;
   }
-  
+
   .learn__subjects-item-text {
     font-size: 14px;
     line-height: 40px;
@@ -151,5 +151,11 @@
   .learn__advantages-cards {
     flex-wrap: wrap;
     width: 500px;
+  }
+}
+
+@media (max-width: 440px) {
+  .learn {
+    margin-top: 50px;
   }
 }

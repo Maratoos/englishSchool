@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC } from "react"
 import {
   Table,
   TableBody,
@@ -9,21 +9,20 @@ import {
   Paper,
   Button,
   Checkbox,
-} from "@mui/material";
-import { Typography } from "../../../components/Typography/Typography";
-import { getCollection } from "../../../hooks/getCollection";
-import { useCollection } from "../../../hooks/useColection";
-import { IApplication } from "../../../models/models";
-import { formatDate } from "../../../hooks/formatDate";
+} from "@mui/material"
+import { Typography } from "../../../components/Typography/Typography"
+import { getCollection } from "../../../hooks/getCollection"
+import { useCollection } from "../../../hooks/useColection"
+import { IApplication } from "../../../models/models"
+import { formatDate } from "../../../hooks/formatDate"
 
 export const Applications: FC = () => {
-  const { documents, error, isPending } =
-    getCollection<IApplication>("applications");
-  const { deleteDocument, updateDocument } = useCollection("applications");
+  const { documents, error, isPending } = getCollection<IApplication>("applications")
+  const { deleteDocument, updateDocument } = useCollection("applications")
 
   const handleDeleteDocument = async (docId: string): Promise<void> => {
-    await deleteDocument(docId);
-  };
+    await deleteDocument(docId)
+  }
 
   return (
     <>
@@ -49,10 +48,7 @@ export const Applications: FC = () => {
               Array.isArray(documents) &&
               documents.length > 0 &&
               documents.map((doc) => (
-                <TableRow
-                  key={doc.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
+                <TableRow key={doc.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                   <TableCell component="th" scope="row">
                     {doc.name}
                   </TableCell>
@@ -63,26 +59,17 @@ export const Applications: FC = () => {
                     {doc.currentLevel ? doc.currentLevel : "Не пройден"}
                   </TableCell>
                   <TableCell align="right" width={100}>
-                    {doc.correctAnswers
-                      ? `${doc.correctAnswers}/30`
-                      : "Не пройден"}
+                    {doc.correctAnswers ? `${doc.correctAnswers}/30` : "Не пройден"}
                   </TableCell>
-                  <TableCell align="right">
-                    {formatDate(doc.createdAt)}
-                  </TableCell>
+                  <TableCell align="right">{formatDate(doc.createdAt)}</TableCell>
                   <TableCell align="right" width={90}>
                     <Checkbox
                       checked={doc.checked}
-                      onChange={(e) =>
-                        updateDocument(doc.id, { checked: e.target.checked })
-                      }
+                      onChange={(e) => updateDocument(doc.id, { checked: e.target.checked })}
                     />
                   </TableCell>
                   <TableCell align="right">
-                    <Button
-                      onClick={() => handleDeleteDocument(doc.id)}
-                      variant="contained"
-                    >
+                    <Button onClick={() => handleDeleteDocument(doc.id)} variant="contained">
                       Удалить
                     </Button>
                   </TableCell>
@@ -92,5 +79,5 @@ export const Applications: FC = () => {
         </Table>
       </TableContainer>
     </>
-  );
-};
+  )
+}

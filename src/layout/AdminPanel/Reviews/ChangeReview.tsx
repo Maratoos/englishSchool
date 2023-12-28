@@ -1,44 +1,39 @@
-import React, { FC, useState } from "react";
-import { IReview } from "../../../models/models";
-import { Modal } from "../../../components/Modal/Modal";
-import { TextField, Button } from "@mui/material";
-import { useCollection } from "../../../hooks/useColection";
+import React, { FC, useState } from "react"
+import { IReview } from "../../../models/models"
+import { Modal } from "../../../components/Modal/Modal"
+import { TextField, Button } from "@mui/material"
+import { useCollection } from "../../../hooks/useColection"
 
 interface Props {
-  active: boolean;
-  document: IReview;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-  collectionName: string;
+  active: boolean
+  document: IReview
+  setActive: React.Dispatch<React.SetStateAction<boolean>>
+  collectionName: string
 }
 
-export const ChangeReview: FC<Props> = ({
-  active,
-  setActive,
-  document,
-  collectionName,
-}) => {
+export const ChangeReview: FC<Props> = ({ active, setActive, document, collectionName }) => {
   const [newData, setNewData] = useState<Omit<IReview, "id" | "createdAt">>({
     name: document.name,
     instName: document.instName,
     review: document.review,
-  });
-  const [isPending, setIsPending] = useState<boolean>(false);
-  const { updateDocument } = useCollection(collectionName);
+  })
+  const [isPending, setIsPending] = useState<boolean>(false)
+  const { updateDocument } = useCollection(collectionName)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsPending(true);
-    await updateDocument(document.id, newData);
-    setIsPending(false);
-    setActive(false);
-  };
+    e.preventDefault()
+    setIsPending(true)
+    await updateDocument(document.id, newData)
+    setIsPending(false)
+    setActive(false)
+  }
 
   return (
     <>
@@ -85,5 +80,5 @@ export const ChangeReview: FC<Props> = ({
         </form>
       </Modal>
     </>
-  );
-};
+  )
+}
